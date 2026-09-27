@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="ta" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thamizhan Talent Hub - தமிழ்ப் படைப்பகம்</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Mukta Malar (Tamil) & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta+Malar:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        tamil: {
+                            gold: '#F59E0B',
+                            brightGold: '#FBBF24',
+                            crimson: '#E11D48',
+                            royalPurple: '#1E1B4B',
+                            darkBg: '#0B0F19',
+                            cardBg: '#1E293B',
+                            cardBorder: '#334155'
+                        }
+                    },
+                    fontFamily: {
+                        tamil: ['"Mukta Malar"', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Mukta Malar', 'Plus Jakarta Sans', sans-serif;
+            background-color: #0B0F19;
+            color: #F1F5F9;
+        }
+
+        .gradient-text-gold {
+            background: linear-gradient(135deg, #FBBF24 0%, #F97316 50%, #E11D48 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 45px -10px rgba(245, 158, 11, 0.25);
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #F59E0B;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
+
+    <header class="sticky top-0 z-40 glass-panel border-b border-slate-800/90 bg-slate-950/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo Section -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-600 via-amber-500 to-rose-600 flex items-center justify-center text-slate-950 text-2xl font-black shadow-lg shadow-amber-500/20 border border-amber-400/40">
+                   <img src="logo.jpg" alt="Tamil Club Logo" class="w-full h-full object-contain rounded-full">
+               </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-black tracking-tight gradient-text-gold" id="app-logo-title">
+                        தமிழ்ப் படைப்பகம்
+                    </h1>
+                    <p class="text-xs text-slate-400 font-semibold" id="app-logo-sub">Thamizhan Talent Hub</p>
+                </div>
+            </div>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-1 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800">
+                <button onclick="navigateTo('home')" id="nav-btn-home" class="nav-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm transition-all font-bold text-slate-950 bg-amber-500 shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-house mr-1.5"></i><span data-i18n="navHome">முகப்பு</span>
+                </button>
+                <button onclick="navigateTo('explore')" id="nav-btn-explore" class="nav-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm transition-all font-semibold text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-compass mr-1.5"></i><span data-i18n="navExplore">படைப்புகள்</span>
+                </button>
+                <button onclick="navigateTo('submit')" id="nav-btn-submit" class="nav-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm transition-all font-semibold text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-circle-plus mr-1.5"></i><span data-i18n="navSubmit">பதிவேற்று</span>
+                </button>
+                <button onclick="navigateTo('companies')" id="nav-btn-companies" class="nav-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm transition-all font-semibold text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-briefcase mr-1.5"></i><span data-i18n="navCompanies">நிறுவனங்கள்</span>
+                </button>
+                <button onclick="navigateTo('dashboard')" id="nav-btn-dashboard" class="nav-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm transition-all font-semibold text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-chart-pie mr-1.5"></i><span data-i18n="navDashboard">சுயவிவரம்</span>
+                </button>
+                <button onclick="navigateTo('about')" id="nav-btn-about" class="nav-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm transition-all font-semibold text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-users mr-1.5"></i><span data-i18n="navAbout">மன்றம் பற்றி</span>
+                </button>
+            </nav>
+
+            <!-- Language Switcher & Mobile Menu Toggle -->
+            <div class="flex items-center gap-3">
+                <button onclick="toggleLanguage()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:from-amber-500/30 hover:to-orange-500/30 text-amber-400 font-extrabold text-xs sm:text-sm transition-all border border-amber-500/40 flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-language text-base"></i>
+                    <span id="lang-toggle-btn-label">English-க்கு மாறுக</span>
+                </button>
+
+                <!-- Mobile Navigation Button -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-slate-800 text-slate-300 hover:text-white border border-slate-700">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-800 bg-slate-950/95 px-4 py-4 space-y-2">
+            <button onclick="navigateTo('home'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-slate-300 hover:bg-slate-900 font-medium text-sm flex items-center gap-3">
+                <i class="fa-solid fa-house text-amber-400"></i><span data-i18n="navHome">முகப்பு</span>
+            </button>
+            <button onclick="navigateTo('explore'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-slate-300 hover:bg-slate-900 font-medium text-sm flex items-center gap-3">
+                <i class="fa-solid fa-compass text-amber-400"></i><span data-i18n="navExplore">படைப்புகள்</span>
+            </button>
+            <button onclick="navigateTo('submit'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-slate-300 hover:bg-slate-900 font-medium text-sm flex items-center gap-3">
+                <i class="fa-solid fa-circle-plus text-amber-400"></i><span data-i18n="navSubmit">பதிவேற்று</span>
+            </button>
+            <button onclick="navigateTo('companies'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-slate-300 hover:bg-slate-900 font-medium text-sm flex items-center gap-3">
+                <i class="fa-solid fa-briefcase text-amber-400"></i><span data-i18n="navCompanies">நிறுவனங்கள்</span>
+            </button>
+            <button onclick="navigateTo('dashboard'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-slate-300 hover:bg-slate-900 font-medium text-sm flex items-center gap-3">
+                <i class="fa-solid fa-chart-pie text-amber-400"></i><span data-i18n="navDashboard">சுயவிவரம்</span>
+            </button>
+            <button onclick="navigateTo('about'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-slate-300 hover:bg-slate-900 font-medium text-sm flex items-center gap-3">
+                <i class="fa-solid fa-users text-amber-400"></i><span data-i18n="navAbout">மன்றம் பற்றி</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+
+        <!-- ==================== PAGE 1: HOME PAGE ==================== -->
+        <section id="page-home" class="page-view space-y-10">
+            
+            <!-- Hero Banner -->
+            <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950/40 to-slate-950 border border-amber-500/30 p-6 sm:p-12 glow-effect">
+            <img src="herobanner.jpg" alt="Tamil Heritage" class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700">
+                <div class="absolute -top-24 -right-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="relative z-10 max-w-3xl space-y-5">
+                    <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider">
+                        <i class="fa-solid fa-certificate"></i> <span data-i18n="heroBadge">தமிழ் மன்றத்தின் புதிய திறமைப் பேழை</span>
+                    </span>
+                    
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight tracking-tight" data-i18n="heroHeading">
+                        உங்கள் படைப்பாற்றலை உலகுக்குக் காட்டுங்கள். நிறுவனங்களிடம் வாய்ப்புகளைப் பெறுங்கள்!
+                    </h2>
+
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed" data-i18n="heroDescription">
+                        எழுத்து, கவிதை, மென்பொருள் வடிவாக்கம், டிஜிட்டல் ஓவியம், வீடியோ படைப்பு மற்றும் தொழில் முனைவு யோசனைகளை புதியதாக பதிவிட்டு நேரடியாக நிறுவனங்களிடம் வாய்ப்புகளைப் பெறுங்கள்.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <button onclick="navigateTo('submit')" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-rose-600 hover:from-amber-600 hover:to-rose-700 text-slate-950 font-extrabold text-sm shadow-xl shadow-amber-500/25 transition-all transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-pen-fancy mr-2"></i><span data-i18n="heroBtnSubmit">புதிய படைப்பை பதிவிட</span>
+                        </button>
+                        <button onclick="navigateTo('explore')" class="px-6 py-3.5 rounded-2xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold text-sm transition-all">
+                            <i class="fa-solid fa-magnifying-glass mr-2"></i><span data-i18n="heroBtnExplore">படைப்புகளைப் பார்க்க</span>
+                        </button>
+                        <button onclick="navigateTo('companies')" class="px-6 py-3.5 rounded-2xl bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-500/40 text-indigo-300 font-bold text-sm transition-all">
+                            <i class="fa-solid fa-building mr-2"></i><span data-i18n="heroBtnRecruit">நிறுவனங்கள் போர்ட்டல்</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Platform Counters -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="glass-panel p-5 rounded-2xl text-center border-l-4 border-l-amber-500">
+                    <p class="text-2xl sm:text-3xl font-black text-amber-400" id="stat-posts-count">0</p>
+                    <p class="text-xs text-slate-400 mt-1 font-semibold" data-i18n="statPosts">பதிவுசெய்த படைப்புகள்</p>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl text-center border-l-4 border-l-rose-500">
+                    <p class="text-2xl sm:text-3xl font-black text-rose-400" id="stat-views-count">0</p>
+                    <p class="text-xs text-slate-400 mt-1 font-semibold" data-i18n="statViews">மொத்த பார்வைகள்</p>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl text-center border-l-4 border-l-emerald-500">
+                    <p class="text-2xl sm:text-3xl font-black text-emerald-400" id="stat-companies-count">0</p>
+                    <p class="text-xs text-slate-400 mt-1 font-semibold" data-i18n="statCompanies">செயலிலுள்ள வேலை வாய்ப்புகள்</p>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl text-center border-l-4 border-l-indigo-500">
+                    <p class="text-2xl sm:text-3xl font-black text-indigo-400" id="stat-hires-count">0</p>
+                    <p class="text-xs text-slate-400 mt-1 font-semibold" data-i18n="statHires">ஏற்றுக்கொண்ட வாய்ப்புகள்</p>
+                </div>
+            </div>
+
+            <!-- Home Showcase Section -->
+            <div class="space-y-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white" data-i18n="featuredTitle">சமீபத்திய படைப்புகள்</h3>
+                        <p class="text-xs text-slate-400" data-i18n="featuredSubtitle">உறுப்பினர்களால் புதியதாக பதிவிடப்பட்ட சிறந்த திறமைகள்</p>
+                    </div>
+                    <button onclick="navigateTo('explore')" class="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1">
+                        <span data-i18n="btnViewAll">அனைத்தையும் பார்</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="home-featured-grid">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== PAGE 2: EXPLORE TALENTS ==================== -->
+        <section id="page-explore" class="page-view hidden space-y-6">
+            
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-black text-white" data-i18n="exploreTitle">படைப்புகள் & திறமைகள்</h2>
+                    <p class="text-xs text-slate-400" data-i18n="exploreDesc">தமிழ் இளைஞர்களின் அனைத்து படைப்புகளையும் தேடிக் கண்டறியுங்கள்.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-400 font-semibold" data-i18n="labelSort">வரிசைப்படுத்து:</span>
+                    <select id="explore-sort" onchange="renderExplorePage()" class="bg-slate-900 border border-slate-700 text-white text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500">
+                        <option value="newest" data-i18n="sortNewest">புதியவை (Newest)</option>
+                        <option value="views" data-i18n="sortViews">அதிக பார்வை (Most Viewed)</option>
+                        <option value="likes" data-i18n="sortLikes">அதிக விருப்பங்கள் (Most Liked)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Search and Filter Pills -->
+            <div class="glass-panel p-4 rounded-2xl flex flex-col md:flex-row gap-4 items-center">
+                <div class="relative w-full md:w-80">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                    <input type="text" id="explore-search-input" onkeyup="renderExplorePage()" placeholder="தேடுங்கள் (எ.கா: கவிதை, React, Figma)..." class="w-full bg-slate-900 border border-slate-700 text-white pl-10 pr-4 py-2.5 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-amber-500">
+                </div>
+
+                <!-- Category Pills Container -->
+                <div class="flex items-center gap-2 overflow-x-auto w-full hide-scrollbar py-1" id="explore-category-pills">
+                    <!-- Dynamic rendering via JS -->
+                </div>
+            </div>
+
+            <!-- Talent Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="explore-cards-grid">
+                <!-- JS Populated -->
+            </div>
+
+        </section>
+
+        <!-- ==================== PAGE 3: SUBMIT TALENT FORM ==================== -->
+        <section id="page-submit" class="page-view hidden max-w-4xl mx-auto space-y-6">
+            
+            <div class="text-center space-y-2">
+                <h2 class="text-3xl font-black text-white" data-i18n="submitPageTitle">உங்கள் திறமையை வெளிப்படுத்துங்கள்</h2>
+                <p class="text-xs sm:text-sm text-slate-400" data-i18n="submitPageSub">புதிய உறுப்பினராக உங்களைப் பதிவுசெய்து உங்கள் படைப்புகளை சமர்ப்பிக்கவும்.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Submission Form Column -->
+                <div class="lg:col-span-2 glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+                    <form id="submit-talent-form" onsubmit="handleTalentSubmit(event)" class="space-y-5">
+                        
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2" data-i18n="formTitle">
+                                படைப்பின் தலைப்பு / Title *
+                            </label>
+                            <input type="text" id="form-title" oninput="updateLivePreview()" required placeholder="எ.கா: தமிழ் AI மொபைல் செயலி / நவீன புதுக்கவிதை" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 text-xs sm:text-sm">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2" data-i18n="formCategory">
+                                    பிரிவு / Category *
+                                </label>
+                                <select id="form-category" onchange="updateLivePreview()" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 text-xs sm:text-sm">
+                                    <option value="Literature" data-i18n="catLiterature">எழுத்து & கவிதை</option>
+                                    <option value="Coding" data-i18n="catCoding">மென்பொருள் & நிரலாக்கம்</option>
+                                    <option value="Design" data-i18n="catDesign">டிஜிட்டல் ஓவியம் & UI/UX</option>
+                                    <option value="Media" data-i18n="catMedia">வீடியோ & பாடல்</option>
+                                    <option value="Startup" data-i18n="catStartup">தொழில் யோசனை</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2" data-i18n="formAuthor">
+                                    உங்கள் பெயர் / Author Name *
+                                </label>
+                                <input type="text" id="form-author" oninput="updateLivePreview()" required placeholder="உங்கள் பெயர்" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 text-xs sm:text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2" data-i18n="formDesc">
+                                படைப்பின் முழு விளக்கம் / Description *
+                            </label>
+                            <textarea id="form-desc" oninput="updateLivePreview()" rows="5" required placeholder="உங்கள் படைப்பு பற்றிய முழு விவரங்களை இங்கு பதிவிடவும்..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-4 text-white focus:outline-none focus:border-amber-500 text-xs sm:text-sm"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2" data-i18n="formTags">
+                                குறிச்சொற்கள் / Tags (Comma separated)
+                            </label>
+                            <input type="text" id="form-tags" oninput="updateLivePreview()" placeholder="e.g. Tamil, Story, React, Figma, AI" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 text-xs sm:text-sm">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2" data-i18n="formLink">
+                                    இணைப்பு / Demo URL (Optional)
+                                </label>
+                                <input type="url" id="form-link" placeholder="https://github.com/..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 text-xs sm:text-sm">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2" data-i18n="formContact">
+                                    தொடர்பு எண் / Email *
+                                </label>
+                                <input type="text" id="form-contact" required placeholder="Email or Phone Number" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 text-xs sm:text-sm">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-rose-600 hover:from-amber-600 hover:to-rose-700 font-extrabold text-slate-950 text-sm shadow-xl shadow-amber-500/20 transition-all">
+                            <i class="fa-solid fa-paper-plane mr-2"></i><span data-i18n="btnPublish">இப்போதே வெளியிடு</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Live Preview Column -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-wider">
+                        <i class="fa-solid fa-eye"></i> <span data-i18n="lblPreview">நேரலை தோற்றம் (Live Preview)</span>
+                    </div>
+
+                    <div id="live-preview-card" class="glass-card rounded-3xl p-6 border border-amber-500/30 bg-slate-900/90 shadow-2xl">
+                        <div class="flex items-center justify-between mb-3">
+                            <span id="prev-category" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                                பிரிவு
+                            </span>
+                            <span class="text-xs text-slate-500"><i class="fa-regular fa-clock mr-1"></i>Just Now</span>
+                        </div>
+
+                        <h3 id="prev-title" class="text-base font-bold text-white mb-2 line-clamp-2">
+                            உங்கள் படைப்புத் தலைப்பு
+                        </h3>
+
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="w-6 h-6 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-xs">
+                                P
+                            </div>
+                            <span id="prev-author" class="text-xs font-semibold text-slate-300">உங்கள் பெயர்</span>
+                        </div>
+
+                        <p id="prev-desc" class="text-xs text-slate-400 leading-relaxed mb-4 line-clamp-4">
+                            உங்கள் படைப்பு விளக்கம் இங்கு தோன்றும்...
+                        </p>
+
+                        <div id="prev-tags-container" class="flex flex-wrap gap-1 mb-4">
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px]">#Tamil</span>
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-800 flex justify-between items-center">
+                            <span class="text-xs text-slate-500"><i class="fa-solid fa-eye mr-1"></i>0 views</span>
+                            <span class="px-3 py-1 rounded-xl bg-amber-500/20 text-amber-400 font-bold text-xs" data-i18n="lblLive">Preview</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== PAGE 4: RECRUITER PORTAL ==================== -->
+        <section id="page-companies" class="page-view hidden space-y-8">
+            
+            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-indigo-500/30 bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div>
+                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 mb-2 inline-block">
+                        Recruiter Hub
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white" data-i18n="companyTitle">நிறுவனங்களுக்கான சிறப்புப் போர்ட்டல்</h2>
+                    <p class="text-xs sm:text-sm text-slate-300 mt-1" data-i18n="companyDesc">
+                        தமிழ் இளைஞர்களின் சிறந்த படைப்புகளை மதிப்பாய்வு செய்து, நேரடியாக வேலை வாய்ப்பு அல்லது திட்டங்களை வழங்குங்கள்.
+                    </p>
+                </div>
+                <button onclick="openPostJobModal()" class="px-5 py-3.5 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-500/30 shrink-0">
+                    <i class="fa-solid fa-plus-circle mr-2"></i><span data-i18n="btnPostJob">வேலை வாய்ப்பு பதிவிட</span>
+                </button>
+            </div>
+
+            <!-- Active Company Job Listings -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-briefcase text-indigo-400"></i>
+                    <span data-i18n="activeJobsTitle">செயலிலுள்ள வேலை வாய்ப்புகள்</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="company-jobs-grid">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <!-- Recruiter Accepted Applications Table Tracker -->
+            <div class="glass-panel rounded-3xl overflow-hidden border border-slate-800">
+                <div class="p-4 bg-slate-900/80 border-b border-slate-800 flex justify-between items-center">
+                    <h4 class="font-bold text-white text-sm" data-i18n="acceptedTalentsTitle">தேர்ந்தெடுக்கப்பட்ட படைப்பாளிகள் (Hired List)</h4>
+                    <span class="text-xs text-amber-400 font-semibold" id="total-offers-count">0 Offers</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-800 text-slate-400 text-xs uppercase bg-slate-900/40">
+                                <th class="p-4" data-i18n="thAuthor">படைப்பாளி</th>
+                                <th class="p-4" data-i18n="thWork">படைப்பு</th>
+                                <th class="p-4" data-i18n="thCompany">நிறுவனம்</th>
+                                <th class="p-4" data-i18n="thRole">பணி</th>
+                                <th class="p-4" data-i18n="thStatus">நிலை</th>
+                            </tr>
+                        </thead>
+                        <tbody id="company-offers-table" class="divide-y divide-slate-800/60 text-xs sm:text-sm text-slate-300">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== PAGE 5: USER DASHBOARD ==================== -->
+        <section id="page-dashboard" class="page-view hidden space-y-8">
+            
+            <div class="glass-panel p-6 rounded-3xl border border-slate-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 to-rose-600 flex items-center justify-center text-slate-950 font-black text-2xl shadow-lg shadow-amber-500/20">
+                        த
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-white" data-i18n="dashHeaderTitle">எனது சுயவிவரப் பக்கம்</h2>
+                        <p class="text-xs text-slate-400" data-i18n="dashHeaderSub">உங்களது படைப்புகளின் புள்ளிவிவரங்கள் & வரப்பெற்ற வாய்ப்புகள்</p>
+                    </div>
+                </div>
+                <button onclick="navigateTo('submit')" class="px-4 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs hover:bg-amber-400">
+                    <i class="fa-solid fa-plus mr-1"></i> <span data-i18n="dashBtnNew">புதிய படைப்பு</span>
+                </button>
+            </div>
+
+            <!-- Dashboard Personal Stats -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="p-5 rounded-2xl glass-panel text-center">
+                    <p class="text-2xl font-black text-amber-400" id="dash-my-posts-count">0</p>
+                    <p class="text-xs text-slate-400 font-semibold mt-1" data-i18n="dashStatPosts">எனது படைப்புகள்</p>
+                </div>
+                <div class="p-5 rounded-2xl glass-panel text-center">
+                    <p class="text-2xl font-black text-rose-400" id="dash-my-views-count">0</p>
+                    <p class="text-xs text-slate-400 font-semibold mt-1" data-i18n="dashStatViews">மொத்த பார்வைகள்</p>
+                </div>
+                <div class="p-5 rounded-2xl glass-panel text-center">
+                    <p class="text-2xl font-black text-emerald-400" id="dash-my-offers-count">0</p>
+                    <p class="text-xs text-slate-400 font-semibold mt-1" data-i18n="dashStatOffers">வந்த வாய்ப்புகள்</p>
+                </div>
+            </div>
+
+            <!-- User Submissions List -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-white" data-i18n="dashMyWorksTitle">நான் வெளியிட்ட படைப்புகள்</h3>
+                <div class="space-y-3" id="dash-user-posts-list">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== PAGE 6: ABOUT CLUB & EVENTS ==================== -->
+        <section id="page-about" class="page-view hidden space-y-10">
+            
+            <!-- About Club Header -->
+            <div class="glass-panel p-8 rounded-3xl border border-slate-800 text-center max-w-3xl mx-auto space-y-4">
+                <span class="px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold uppercase">
+                    Thamizhan Club Vision
+                </span>
+                <h2 class="text-3xl font-black text-white" data-i18n="aboutTitle">தமிழ்ப் படைப்பகம் மன்றம் பற்றி</h2>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" data-i18n="aboutDesc">
+                    தமிழ்ப் படைப்பகம் என்பது உலகம் முழுவதும் உள்ள தமிழ் இளைஞர்களின் இலக்கிய, தொழில்நுட்ப மற்றும் கலைத் திறமைகளை ஒன்றுதிரட்டி அவர்களுக்கு தகுந்த வேலை வாய்ப்புகளையும் அங்கீகாரத்தையும் பெற்றுத்தரும் நோக்குடன் செயல்படும் அமைப்பாகும்.
+                </p>
+            </div>
+
+            <!-- Club Core Values -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-6 rounded-2xl glass-panel space-y-2">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-lg mb-2">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-base" data-i18n="val1Title">தனித்துவமான படைப்புகள்</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" data-i18n="val1Desc">உங்கள் சுயமான படைப்புகள் மற்றும் காப்புரிமை பெற்ற உழைப்பை மட்டுமே பகிர வேண்டும்.</p>
+                </div>
+
+                <div class="p-6 rounded-2xl glass-panel space-y-2">
+                    <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-lg mb-2">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-base" data-i18n="val2Title">நிறுவன இணைப்பு</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" data-i18n="val2Desc">நம்பகமான தொழில்நிறுவனங்களுடன் நேரடியாக தொடர்புகொள்ளும் பாதுகாப்பான வழிமுறை.</p>
+                </div>
+
+                <div class="p-6 rounded-2xl glass-panel space-y-2">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-lg mb-2">
+                        <i class="fa-solid fa-heart text-indigo-400"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-base" data-i18n="val3Title">தமிழ் பண்பாட்டு மேன்மை</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" data-i18n="val3Desc">தமிழ் மொழியையும், பண்பாட்டையும் நவீன தொழில்நுட்பத்துடன் இணைத்து முன்னேறுதல்.</p>
+                </div>
+            </div>
+
+            <!-- Club Contact Form -->
+            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800 max-w-2xl mx-auto space-y-4">
+                <h3 class="text-xl font-bold text-white text-center" data-i18n="contactTitle">மன்ற நிர்வாகிகளைத் தொடர்புகொள்ள</h3>
+                <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 uppercase mb-1" data-i18n="contactName">பெயர் / Name</label>
+                        <input type="text" required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-xs sm:text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 uppercase mb-1" data-i18n="contactEmail">மின்னஞ்சல் / Email</label>
+                        <input type="email" required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-xs sm:text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 uppercase mb-1" data-i18n="contactMsg">செய்தி / Message</label>
+                        <textarea rows="4" required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-xs sm:text-sm"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-600 font-bold text-slate-950 text-xs sm:text-sm transition-all">
+                        <span data-i18n="btnContactSend">செய்தி அனுப்பு (Send Message)</span>
+                    </button>
+                </form>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ==================== MODALS & TOASTS ==================== -->
+
+    <!-- Detail View Modal -->
+    <div id="detail-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-panel max-w-2xl w-full p-6 sm:p-8 rounded-3xl border border-slate-700 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('detail-modal')" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div id="modal-detail-content" class="space-y-5">
+                <!-- Dynamic detail content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Hire / Connect Modal -->
+    <div id="hire-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-panel max-w-md w-full p-6 rounded-3xl border border-amber-500/30 shadow-2xl relative">
+            <button onclick="closeModal('hire-modal')" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="text-xl font-bold text-white mb-1" id="hire-modal-title">வேலை / வாய்ப்பு வழங்க</h3>
+            <p class="text-xs text-slate-400 mb-4" id="hire-modal-subtitle">படைப்பாளிக்கு உங்கள் விருப்பத்தை அனுப்பவும்</p>
+
+            <form onsubmit="handleHireSubmit(event)" class="space-y-4">
+                <input type="hidden" id="hire-post-id">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1" data-i18n="hireFormComp">நிறுவன பெயர் / Company *</label>
+                    <input type="text" id="hire-company" required placeholder="e.g. Zoho, Freshworks, Studio X" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white text-xs sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1" data-i18n="hireFormRole">வழங்கப்படும் பணி / Role Offered *</label>
+                    <input type="text" id="hire-role" required placeholder="e.g. Fullstack Developer, Writer" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white text-xs sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1" data-i18n="hireFormNote">செய்தி / Offer Note *</label>
+                    <textarea id="hire-msg" rows="3" required placeholder="உங்களை நேர்காணலுக்கு அழைக்க விரும்புகிறோம்..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white text-xs sm:text-sm"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 font-bold text-white text-xs sm:text-sm">
+                    <span data-i18n="btnSendOffer">அனுப்பு (Send Offer)</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Post Job Modal -->
+    <div id="job-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-panel max-w-md w-full p-6 rounded-3xl border border-indigo-500/30 shadow-2xl relative">
+            <button onclick="closeModal('job-modal')" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="text-xl font-bold text-white mb-3" data-i18n="jobModalTitle">புதிய வேலை வாய்ப்பு பதிவு செய்க</h3>
+
+            <form onsubmit="handleJobSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1" data-i18n="jobFormCompany">நிறுவன பெயர் / Company *</label>
+                    <input type="text" id="job-company" required placeholder="e.g. TechCorp Tamil" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white text-xs">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1" data-i18n="jobFormRole">பணித் தலைப்பு / Role Title *</label>
+                    <input type="text" id="job-title" required placeholder="e.g. Tamil Content Strategist" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white text-xs">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1" data-i18n="jobFormStipend">சம்பளம் / Stipend *</label>
+                    <input type="text" id="job-stipend" required placeholder="e.g. ₹25,000 / month" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white text-xs">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1" data-i18n="jobFormDesc">விளக்கம் / Details *</label>
+                    <textarea id="job-desc" rows="3" required placeholder="பணி தேவைகள் பற்றிய சுருக்கம்..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white text-xs"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 font-bold text-white text-xs">
+                    <span data-i18n="btnPostGigSubmit">வெளியிடு (Post Offer)</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-slate-900 border border-amber-500 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-amber-400 text-lg"></i>
+        <span id="toast-text" class="text-xs font-semibold">வெற்றிகரமாக முடிந்தது!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-8 text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <div>
+                <p class="font-bold text-slate-400" id="footer-logo">தமிழ்ப் படைப்பகம் (Thamizhan Talent Hub) © 2026</p>
+                <p class="text-[11px] mt-0.5" data-i18n="footerSub">தமிழ் இளைஞர்களின் திறமைகளை அங்கீகரிக்கும் உலகளாவிய மேடை.</p>
+            </div>
+            <div class="flex items-center gap-6">
+                <button onclick="navigateTo('home')" class="hover:text-amber-400" data-i18n="navHome">முகப்பு</button>
+                <button onclick="navigateTo('explore')" class="hover:text-amber-400" data-i18n="navExplore">படைப்புகள்</button>
+                <button onclick="navigateTo('companies')" class="hover:text-amber-400" data-i18n="navCompanies">நிறுவனங்கள்</button>
+                <button onclick="navigateTo('about')" class="hover:text-amber-400" data-i18n="navAbout">மன்றம் பற்றி</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== JAVASCRIPT APPLICATION LOGIC ==================== -->
+    <script>
+        // Start completely EMPTY as requested (Fresh start for new users to register & post)
+        let talents = JSON.parse(localStorage.getItem('tth_talents_clean')) || [];
+        let jobs = JSON.parse(localStorage.getItem('tth_jobs_clean')) || [];
+        let offers = JSON.parse(localStorage.getItem('tth_offers_clean')) || [];
+        
+        let currentLang = 'ta'; // Default Language set to Tamil
+        let selectedCategory = 'All';
+
+        // Complete Dictionary for 100% Language Translation Engine
+        const translations = {
+            ta: {
+                navHome: "முகப்பு",
+                navExplore: "படைப்புகள்",
+                navSubmit: "பதிவேற்று",
+                navCompanies: "நிறுவனங்கள்",
+                navDashboard: "சுயவிவரம்",
+                navAbout: "மன்றம் பற்றி",
+                heroBadge: "தமிழ் மன்றத்தின் புதிய திறமைப் பேழை",
+                heroHeading: "உங்கள் படைப்பாற்றலை உலகுக்குக் காட்டுங்கள். நிறுவனங்களிடம் வாய்ப்புகளைப் பெறுங்கள்!",
+                heroDescription: "எழுத்து, கவிதை, மென்பொருள் வடிவாக்கம், டிஜிட்டல் ஓவியம், வீடியோ படைப்பு மற்றும் தொழில் முனைவு யோசனைகளை புதியதாக பதிவிட்டு நேரடியாக நிறுவனங்களிடம் வாய்ப்புகளைப் பெறுங்கள்.",
+                heroBtnSubmit: "புதிய படைப்பை பதிவிட",
+                heroBtnExplore: "படைப்புகளைப் பார்க்க",
+                heroBtnRecruit: "நிறுவனங்கள் போர்ட்டல்",
+                statPosts: "பதிவுசெய்த படைப்புகள்",
+                statViews: "மொத்த பார்வைகள்",
+                statCompanies: "செயலிலுள்ள வேலை வாய்ப்புகள்",
+                statHires: "ஏற்றுக்கொண்ட வாய்ப்புகள்",
+                featuredTitle: "சமீபத்திய படைப்புகள்",
+                featuredSubtitle: "உறுப்பினர்களால் புதியதாக பதிவிடப்பட்ட சிறந்த திறமைகள்",
+                btnViewAll: "அனைத்தையும் பார்",
+                exploreTitle: "படைப்புகள் & திறமைகள்",
+                exploreDesc: "தமிழ் இளைஞர்களின் அனைத்து படைப்புகளையும் தேடிக் கண்டறியுங்கள்.",
+                labelSort: "வரிசைப்படுத்து:",
+                sortNewest: "புதியவை (Newest)",
+                sortViews: "அதிக பார்வை (Most Viewed)",
+                sortLikes: "அதிக விருப்பங்கள் (Most Liked)",
+                submitPageTitle: "உங்கள் திறமையை வெளிப்படுத்துங்கள்",
+                submitPageSub: "புதிய உறுப்பினராக உங்களைப் பதிவுசெய்து உங்கள் படைப்புகளை சமர்ப்பிக்கவும்.",
+                formTitle: "படைப்பின் தலைப்பு / Title *",
+                formCategory: "பிரிவு / Category *",
+                catLiterature: "எழுத்து & கவிதை",
+                catCoding: "மென்பொருள் & நிரலாக்கம்",
+                catDesign: "டிஜிட்டல் ஓவியம் & UI/UX",
+                catMedia: "வீடியோ & பாடல்",
+                catStartup: "தொழில் யோசனை",
+                formAuthor: "உங்கள் பெயர் / Author Name *",
+                formDesc: "படைப்பின் முழு விளக்கம் / Description *",
+                formTags: "குறிச்சொற்கள் / Tags (Comma separated)",
+                formLink: "இணைப்பு / Demo URL (Optional)",
+                formContact: "தொடர்பு எண் / Email *",
+                btnPublish: "இப்போதே வெளியிடு",
+                lblPreview: "நேரலை தோற்றம் (Live Preview)",
+                lblLive: "Preview",
+                companyTitle: "நிறுவனங்களுக்கான சிறப்புப் போர்ட்டல்",
+                companyDesc: "தமிழ் இளைஞர்களின் சிறந்த படைப்புகளை மதிப்பாய்வு செய்து, நேரடியாக வேலை வாய்ப்பு அல்லது திட்டங்களை வழங்குங்கள்.",
+                btnPostJob: "வேலை வாய்ப்பு பதிவிட",
+                activeJobsTitle: "செயலிலுள்ள வேலை வாய்ப்புகள்",
+                acceptedTalentsTitle: "தேர்ந்தெடுக்கப்பட்ட படைப்பாளிகள் (Hired List)",
+                thAuthor: "படைப்பாளி",
+                thWork: "படைப்பு",
+                thCompany: "நிறுவனம்",
+                thRole: "பணி",
+                thStatus: "நிலை",
+                dashHeaderTitle: "எனது சுயவிவரப் பக்கம்",
+                dashHeaderSub: "உங்களது படைப்புகளின் புள்ளிவிவரங்கள் & வரப்பெற்ற வாய்ப்புகள்",
+                dashBtnNew: "புதிய படைப்பு",
+                dashStatPosts: "எனது படைப்புகள்",
+                dashStatViews: "மொத்த பார்வைகள்",
+                dashStatOffers: "வந்த வாய்ப்புகள்",
+                dashMyWorksTitle: "நான் வெளியிட்ட படைப்புகள்",
+                aboutTitle: "தமிழ்ப் படைப்பகம் மன்றம் பற்றி",
+                aboutDesc: "தமிழ்ப் படைப்பகம் என்பது உலகம் முழுவதும் உள்ள தமிழ் இளைஞர்களின் இலக்கிய, தொழில்நுட்ப மற்றும் கலைத் திறமைகளை ஒன்றுதிரட்டி அவர்களுக்கு தகுந்த வேலை வாய்ப்புகளையும் அங்கீகாரத்தையும் பெற்றுத்தரும் நோக்குடன் செயல்படும் அமைப்பாகும்.",
+                val1Title: "தனித்துவமான படைப்புகள்",
+                val1Desc: "உங்கள் சுயமான படைப்புகள் மற்றும் காப்புரிமை பெற்ற உழைப்பை மட்டுமே பகிர வேண்டும்.",
+                val2Title: "நிறுவன இணைப்பு",
+                val2Desc: "நம்பகமான தொழில்நிறுவனங்களுடன் நேரடியாக தொடர்புகொள்ளும் பாதுகாப்பான வழிமுறை.",
+                val3Title: "தமிழ் பண்பாட்டு மேன்மை",
+                val3Desc: "தமிழ் மொழியையும், பண்பாட்டையும் நவீன தொழில்நுட்பத்துடன் இணைத்து முன்னேறுதல்.",
+                contactTitle: "மன்ற நிர்வாகிகளைத் தொடர்புகொள்ள",
+                contactName: "பெயர் / Name",
+                contactEmail: "மின்னஞ்சல் / Email",
+                contactMsg: "செய்தி / Message",
+                btnContactSend: "செய்தி அனுப்பு (Send Message)",
+                hireFormComp: "நிறுவன பெயர் / Company *",
+                hireFormRole: "வழங்கப்படும் பணி / Role Offered *",
+                hireFormNote: "செய்தி / Offer Note *",
+                btnSendOffer: "அனுப்பு (Send Offer)",
+                jobModalTitle: "புதிய வேலை வாய்ப்பு பதிவு செய்க",
+                jobFormCompany: "நிறுவன பெயர் / Company *",
+                jobFormRole: "பணித் தலைப்பு / Role Title *",
+                jobFormStipend: "சம்பளம் / Stipend *",
+                jobFormDesc: "விளக்கம் / Details *",
+                btnPostGigSubmit: "வெளியிடு (Post Offer)",
+                footerSub: "தமிழ் இளைஞர்களின் திறமைகளை அங்கீகரிக்கும் உலகளாவிய மேடை.",
+                emptyPosts: "இன்னும் படைப்புகள் பதிவு செய்யப்படவில்லை. முதல் நபராக உங்கள் திறமையை பதிவிடுங்கள்!",
+                emptyJobs: "தற்போது வேலை வாய்ப்புகள் எதுவும் இல்லை. நிறுவனங்கள் புதிய வாய்ப்புகளை விரைவில் பதிவிடுவார்கள்.",
+                emptyOffers: "இதுவரை யாருக்கும் வாய்ப்புகள் வழங்கப்படவில்லை.",
+                btnHire: "Hire / வேலை தற",
+                btnDetails: "விவரம்"
+            },
+            en: {
+                navHome: "Home",
+                navExplore: "Explore Works",
+                navSubmit: "Post Talent",
+                navCompanies: "Recruiters",
+                navDashboard: "Dashboard",
+                navAbout: "About Club",
+                heroBadge: "Official Tamil Youth Showcase",
+                heroHeading: "Showcase Your Creativity to the World. Get Hired by Companies!",
+                heroDescription: "Publish your original writings, poetry, software builds, UI designs, media, or business ideas and get hired directly by recruiters.",
+                heroBtnSubmit: "Post New Work",
+                heroBtnExplore: "Explore Showcase",
+                heroBtnRecruit: "Recruiter Portal",
+                statPosts: "Published Works",
+                statViews: "Total Views",
+                statCompanies: "Active Job Listings",
+                statHires: "Hired Talent",
+                featuredTitle: "Recent Creations",
+                featuredSubtitle: "Newly published creations submitted by club members",
+                btnViewAll: "View All",
+                exploreTitle: "Discover Tamil Talents",
+                exploreDesc: "Browse through categorized creative works submitted by members.",
+                labelSort: "Sort By:",
+                sortNewest: "Newest First",
+                sortViews: "Most Viewed",
+                sortLikes: "Most Liked",
+                submitPageTitle: "Showcase Your Talent",
+                submitPageSub: "Register as a new creator and submit your work to the hub.",
+                formTitle: "Work Title *",
+                formCategory: "Category *",
+                catLiterature: "Literature & Poetry",
+                catCoding: "Software & Dev",
+                catDesign: "Art & UI/UX Design",
+                catMedia: "Video & Music",
+                catStartup: "Startup & Business Idea",
+                formAuthor: "Your Name / Author *",
+                formDesc: "Full Description / Details *",
+                formTags: "Tags (Comma separated)",
+                formLink: "Demo URL / Link (Optional)",
+                formContact: "Contact Phone / Email *",
+                btnPublish: "Publish Now",
+                lblPreview: "Live Preview Card",
+                lblLive: "Preview",
+                companyTitle: "Recruiter & Employer Portal",
+                companyDesc: "Review member creations and extend direct job or freelance contract offers.",
+                btnPostJob: "Post a Job / Gig",
+                activeJobsTitle: "Active Opportunity Listings",
+                acceptedTalentsTitle: "Shortlisted & Hired Creators",
+                thAuthor: "Creator",
+                thWork: "Creation",
+                thCompany: "Company",
+                thRole: "Role Offered",
+                thStatus: "Status",
+                dashHeaderTitle: "My Creator Dashboard",
+                dashHeaderSub: "Overview of your published submissions & incoming employer offers",
+                dashBtnNew: "New Post",
+                dashStatPosts: "My Works",
+                dashStatViews: "Total Views",
+                dashStatOffers: "Offers Received",
+                dashMyWorksTitle: "My Published Creations",
+                aboutTitle: "About Thamizhan Talent Hub",
+                aboutDesc: "Thamizhan Talent Hub connects young Tamil creators globally with real job opportunities, projects, and recognition.",
+                val1Title: "Original Creations",
+                val1Desc: "Share only your authentic and copyright-owned works.",
+                val2Title: "Direct Hiring",
+                val2Desc: "A secure bridge connecting talented individuals with verified companies.",
+                val3Title: "Tamil Culture & Tech",
+                val3Desc: "Blending rich Tamil heritage with modern cutting-edge tech innovation.",
+                contactTitle: "Contact Club Leaders",
+                contactName: "Name",
+                contactEmail: "Email",
+                contactMsg: "Message",
+                btnContactSend: "Send Message",
+                hireFormComp: "Company Name *",
+                hireFormRole: "Role Offered *",
+                hireFormNote: "Offer Message *",
+                btnSendOffer: "Send Offer",
+                jobModalTitle: "Post New Job Opportunity",
+                jobFormCompany: "Company Name *",
+                jobFormRole: "Role Title *",
+                jobFormStipend: "Salary / Stipend *",
+                jobFormDesc: "Details *",
+                btnPostGigSubmit: "Publish Offer",
+                footerSub: "A global platform recognizing Tamil youth talent.",
+                emptyPosts: "No posts found yet. Be the first creator to register and publish your work!",
+                emptyJobs: "No active job listings right now. Companies will post new opportunities soon.",
+                emptyOffers: "No hiring offers have been sent yet.",
+                btnHire: "Hire Talent",
+                btnDetails: "Details"
+            }
+        };
+
+        // Category Translations Helper
+        const categoryMap = {
+            Literature: { ta: "எழுத்து & கவிதை", en: "Literature & Poetry" },
+            Coding: { ta: "மென்பொருள்", en: "Software & Dev" },
+            Design: { ta: "ஓவியம் & UI/UX", en: "Art & UI/UX" },
+            Media: { ta: "வீடியோ & பாடல்", en: "Video & Music" },
+            Startup: { ta: "தொழில் யோசனை", en: "Business Idea" }
+        };
+
+        // On Page Load Initialization
+        window.onload = function() {
+            renderExploreCategoryPills();
+            renderAllViews();
+        };
+
+        // Complete View Refresh Handler
+        function renderAllViews() {
+            renderHomeFeatured();
+            renderExplorePage();
+            renderCompanyPage();
+            renderDashboardPage();
+            updateStatsCounters();
+        }
+
+        // Navigation Route Switcher
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(`page-${pageId}`);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Update Navigation state
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = "nav-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-white";
+            });
+            const activeNav = document.getElementById(`nav-btn-${pageId}`);
+            if (activeNav) {
+                activeNav.className = "nav-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-950 bg-amber-500 shadow-lg shadow-amber-500/20";
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // 100% Dynamic Language Toggler Engine
+        function toggleLanguage() {
+            currentLang = currentLang === 'ta' ? 'en' : 'ta';
+            
+            // Toggle Label
+            document.getElementById('lang-toggle-btn-label').innerText = currentLang === 'ta' ? 'English-க்கு மாறுக' : 'தமிழ் பதிப்பு';
+
+            // Replace all static [data-i18n] text nodes
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.innerText = translations[currentLang][key];
+                }
+            });
+
+            // Re-render Dynamic Content for Current Language
+            renderExploreCategoryPills();
+            renderAllViews();
+            updateLivePreview();
+        }
+
+        // Stats Counters Update
+        function updateStatsCounters() {
+            document.getElementById('stat-posts-count').innerText = talents.length;
+            const totalViews = talents.reduce((sum, t) => sum + (t.views || 0), 0);
+            document.getElementById('stat-views-count').innerText = totalViews;
+            document.getElementById('stat-companies-count').innerText = jobs.length;
+            document.getElementById('stat-hires-count').innerText = offers.length;
+        }
+
+        // Category Pills Generator
+        function renderExploreCategoryPills() {
+            const categories = [
+                { id: 'All', ta: 'அனைத்தும்', en: 'All' },
+                { id: 'Literature', ta: 'எழுத்து & கவிதை', en: 'Literature' },
+                { id: 'Coding', ta: 'மென்பொருள்', en: 'Software' },
+                { id: 'Design', ta: 'ஓவியம் & UI/UX', en: 'Design' },
+                { id: 'Media', ta: 'வீடியோ & பாடல்', en: 'Media' },
+                { id: 'Startup', ta: 'தொழில் திட்டம்', en: 'Startup' }
+            ];
+
+            const container = document.getElementById('explore-category-pills');
+            container.innerHTML = categories.map(c => `
+                <button onclick="filterCategory('${c.id}')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${selectedCategory === c.id ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20' : 'bg-slate-900 border border-slate-800 text-slate-300 hover:bg-slate-800'}">
+                    ${currentLang === 'ta' ? c.ta : c.en}
+                </button>
+            `).join('');
+        }
+
+        function filterCategory(cat) {
+            selectedCategory = cat;
+            renderExploreCategoryPills();
+            renderExplorePage();
+        }
+
+        // Home Page Showcase Render
+        function renderHomeFeatured() {
+            const container = document.getElementById('home-featured-grid');
+            if (talents.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-10 text-center glass-panel rounded-3xl space-y-3">
+                        <i class="fa-solid fa-folder-open text-3xl text-amber-500/50"></i>
+                        <p class="text-xs text-slate-400 font-medium">${translations[currentLang].emptyPosts}</p>
+                        <button onclick="navigateTo('submit')" class="px-4 py-2 rounded-xl bg-amber-500 text-slate-950 text-xs font-bold">
+                            ${translations[currentLang].heroBtnSubmit}
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            const topFeatured = [...talents].sort((a, b) => b.views - a.views).slice(0, 3);
+            container.innerHTML = topFeatured.map(item => renderCardHTML(item)).join('');
+        }
+
+        // Explore Page Render
+        function renderExplorePage() {
+            const query = (document.getElementById('explore-search-input')?.value || '').toLowerCase();
+            const sortBy = document.getElementById('explore-sort')?.value || 'newest';
+            const container = document.getElementById('explore-cards-grid');
+
+            let filtered = talents.filter(t => {
+                const matchesCat = selectedCategory === 'All' || t.category === selectedCategory;
+                const matchesSearch = t.title.toLowerCase().includes(query) ||
+                                      t.description.toLowerCase().includes(query) ||
+                                      t.author.toLowerCase().includes(query) ||
+                                      (t.tags && t.tags.some(tag => tag.toLowerCase().includes(query)));
+                return matchesCat && matchesSearch;
+            });
+
+            if (sortBy === 'views') {
+                filtered.sort((a, b) => b.views - a.views);
+            } else if (sortBy === 'likes') {
+                filtered.sort((a, b) => b.likes - a.likes);
+            } else {
+                filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-400 glass-panel rounded-3xl space-y-3">
+                        <i class="fa-solid fa-box-open text-4xl text-slate-600"></i>
+                        <p class="text-xs font-semibold">${translations[currentLang].emptyPosts}</p>
+                        <button onclick="navigateTo('submit')" class="px-4 py-2 rounded-xl bg-amber-500 text-slate-950 text-xs font-bold">
+                            ${translations[currentLang].heroBtnSubmit}
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(item => renderCardHTML(item)).join('');
+        }
+
+        // Card HTML Template Generator
+        function renderCardHTML(item) {
+            const catLabel = categoryMap[item.category] ? categoryMap[item.category][currentLang] : item.category;
+            return `
+                <div class="glass-panel p-6 rounded-3xl space-y-4 flex flex-col justify-between hover:border-amber-500/40 transition-all group">
+                    <div>
+                        <div class="flex items-center justify-between text-xs mb-3">
+                            <span class="px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-400 font-bold border border-amber-500/20">${catLabel}</span>
+                            <span class="text-slate-500"><i class="fa-solid fa-eye mr-1"></i>${item.views}</span>
+                        </div>
+
+                        <h3 class="text-base font-bold text-white mb-1 group-hover:text-amber-400 transition-colors line-clamp-2">${item.title}</h3>
+                        <p class="text-xs text-slate-300 font-medium mb-3">by <span class="text-amber-400 font-bold">${item.author}</span></p>
+
+                        <p class="text-xs text-slate-400 line-clamp-3 leading-relaxed mb-4">${item.description}</p>
+
+                        <div class="flex flex-wrap gap-1 mb-3">
+                            ${(item.tags || []).map(tg => `<span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] text-slate-400">#${tg}</span>`).join('')}
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
+                        <button onclick="likePost('${item.id}')" class="text-xs text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold">
+                            <i class="fa-solid fa-heart"></i> ${item.likes}
+                        </button>
+                        <div class="flex items-center gap-2">
+                            <button onclick="openDetailModal('${item.id}')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-white font-semibold">
+                                ${translations[currentLang].btnDetails}
+                            </button>
+                            <button onclick="openHireModal('${item.id}', '${item.author}')" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 font-bold text-white text-xs shadow-md">
+                                ${translations[currentLang].btnHire}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function likePost(id) {
+            const item = talents.find(t => t.id === id);
+            if (item) {
+                item.likes += 1;
+                localStorage.setItem('tth_talents_clean', JSON.stringify(talents));
+                renderExplorePage();
+                renderHomeFeatured();
+            }
+        }
+
+        // Live Form Preview Update
+        function updateLivePreview() {
+            document.getElementById('prev-title').innerText = document.getElementById('form-title').value || (currentLang === 'ta' ? 'உங்கள் தலைப்பு' : 'Work Title');
+            
+            const selectedCat = document.getElementById('form-category').value;
+            document.getElementById('prev-category').innerText = categoryMap[selectedCat] ? categoryMap[selectedCat][currentLang] : selectedCat;
+            
+            document.getElementById('prev-author').innerText = document.getElementById('form-author').value || (currentLang === 'ta' ? 'உங்கள் பெயர்' : 'Author Name');
+            document.getElementById('prev-desc').innerText = document.getElementById('form-desc').value || (currentLang === 'ta' ? 'உங்கள் படைப்பு விளக்கம் இங்கு தோன்றும்...' : 'Your description will appear live here...');
+
+            const rawTags = document.getElementById('form-tags').value;
+            const tagsArr = rawTags ? rawTags.split(',').map(t => t.trim()) : ['Tamil'];
+            document.getElementById('prev-tags-container').innerHTML = tagsArr.map(t => `<span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px]">#${t}</span>`).join('');
+        }
+
+        // Submit Talent Registration Handler
+        function handleTalentSubmit(e) {
+            e.preventDefault();
+
+            const rawTags = document.getElementById('form-tags').value;
+            const newPost = {
+                id: 't_' + Date.now(),
+                title: document.getElementById('form-title').value,
+                category: document.getElementById('form-category').value,
+                author: document.getElementById('form-author').value,
+                description: document.getElementById('form-desc').value,
+                tags: rawTags ? rawTags.split(',').map(t => t.trim()) : ['Tamil'],
+                link: document.getElementById('form-link').value,
+                contact: document.getElementById('form-contact').value,
+                views: 1,
+                likes: 0,
+                date: new Date().toISOString().split('T')[0]
+            };
+
+            talents.unshift(newPost);
+            localStorage.setItem('tth_talents_clean', JSON.stringify(talents));
+
+            document.getElementById('submit-talent-form').reset();
+            updateLivePreview();
+            showToast(currentLang === 'ta' ? 'உங்கள் படைப்பு வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!' : 'Your work was published successfully!');
+            navigateTo('explore');
+            renderAllViews();
+        }
+
+        // Open Detail Modal
+        function openDetailModal(id) {
+            const item = talents.find(t => t.id === id);
+            if (!item) return;
+
+            item.views += 1;
+            localStorage.setItem('tth_talents_clean', JSON.stringify(talents));
+
+            const catLabel = categoryMap[item.category] ? categoryMap[item.category][currentLang] : item.category;
+
+            const container = document.getElementById('modal-detail-content');
+            container.innerHTML = `
+                <div class="space-y-4">
+                    <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-bold border border-amber-500/20">${catLabel}</span>
+                    <h3 class="text-xl font-black text-white leading-snug">${item.title}</h3>
+                    <div class="flex items-center gap-3 text-xs text-slate-400">
+                        <span><i class="fa-solid fa-user text-amber-400 mr-1"></i> ${item.author}</span>
+                        <span><i class="fa-regular fa-calendar mr-1"></i> ${item.date}</span>
+                        <span><i class="fa-solid fa-eye mr-1"></i> ${item.views} Views</span>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-xs sm:text-sm text-slate-300 leading-relaxed whitespace-pre-line">
+                        ${item.description}
+                    </div>
+
+                    ${item.link ? `
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 mb-1 uppercase">URL / Link:</p>
+                            <a href="${item.link}" target="_blank" class="text-xs text-amber-400 hover:underline break-all"><i class="fa-solid fa-link mr-1"></i>${item.link}</a>
+                        </div>
+                    ` : ''}
+
+                    <div class="pt-4 border-t border-slate-800 flex justify-between items-center">
+                        <span class="text-xs text-slate-400"><i class="fa-solid fa-envelope mr-1"></i>${item.contact}</span>
+                        <button onclick="closeModal('detail-modal'); openHireModal('${item.id}', '${item.author}')" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 font-bold text-white text-xs">
+                            ${translations[currentLang].btnHire}
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('detail-modal').classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        function openHireModal(talentId, authorName) {
+            document.getElementById('hire-post-id').value = talentId;
+            document.getElementById('hire-modal-title').innerText = `${authorName} - Offer`;
+            document.getElementById('hire-modal').classList.remove('hidden');
+        }
+
+        function handleHireSubmit(e) {
+            e.preventDefault();
+            const talentId = document.getElementById('hire-post-id').value;
+            const talent = talents.find(t => t.id === talentId);
+
+            const newOffer = {
+                id: 'o_' + Date.now(),
+                talentTitle: talent ? talent.title : 'Talent Post',
+                creatorName: talent ? talent.author : 'Member',
+                company: document.getElementById('hire-company').value,
+                role: document.getElementById('hire-role').value,
+                status: 'Accepted'
+            };
+
+            offers.unshift(newOffer);
+            localStorage.setItem('tth_offers_clean', JSON.stringify(offers));
+
+            closeModal('hire-modal');
+            showToast(currentLang === 'ta' ? 'வாய்ப்பு வெற்றிகரமாக அனுப்பப்பட்டது!' : 'Offer sent successfully!');
+            renderAllViews();
+        }
+
+        // Job Modal Handler
+        function openPostJobModal() {
+            document.getElementById('job-modal').classList.remove('hidden');
+        }
+
+        function handleJobSubmit(e) {
+            e.preventDefault();
+            const newJob = {
+                id: 'j_' + Date.now(),
+                company: document.getElementById('job-company').value,
+                title: document.getElementById('job-title').value,
+                stipend: document.getElementById('job-stipend').value,
+                desc: document.getElementById('job-desc').value
+            };
+
+            jobs.unshift(newJob);
+            localStorage.setItem('tth_jobs_clean', JSON.stringify(jobs));
+
+            closeModal('job-modal');
+            showToast(currentLang === 'ta' ? 'வேலை வாய்ப்பு பதிவிடப்பட்டது!' : 'Job offer posted successfully!');
+            renderAllViews();
+        }
+
+        function renderCompanyPage() {
+            // Render Job Listings
+            const jobsContainer = document.getElementById('company-jobs-grid');
+            if (jobs.length === 0) {
+                jobsContainer.innerHTML = `
+                    <div class="col-span-full py-8 text-center glass-panel rounded-2xl text-slate-400 text-xs">
+                        ${translations[currentLang].emptyJobs}
+                    </div>
+                `;
+            } else {
+                jobsContainer.innerHTML = jobs.map(j => `
+                    <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-amber-400">${j.company}</span>
+                            <span class="text-[11px] px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-bold">${j.stipend}</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-white">${j.title}</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">${j.desc}</p>
+                    </div>
+                `).join('');
+            }
+
+            // Render Offers Table
+            document.getElementById('total-offers-count').innerText = `${offers.length} Offers`;
+            const tableBody = document.getElementById('company-offers-table');
+            if (offers.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="p-6 text-center text-slate-500 text-xs">
+                            ${translations[currentLang].emptyOffers}
+                        </td>
+                    </tr>
+                `;
+            } else {
+                tableBody.innerHTML = offers.map(o => `
+                    <tr class="hover:bg-slate-900/40">
+                        <td class="p-4 font-bold text-white">${o.creatorName}</td>
+                        <td class="p-4 text-xs text-slate-400 line-clamp-1 max-w-xs">${o.talentTitle}</td>
+                        <td class="p-4 text-amber-400 font-semibold text-xs">${o.company}</td>
+                        <td class="p-4 text-xs">${o.role}</td>
+                        <td class="p-4">
+                            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">${o.status}</span>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+        }
+      // Render Cards with Delete Button
+        function createTalentCardHTML(item) {
+            const catLabel = categoryMap[item.category] ? categoryMap[item.category][currentLang] : item.category;
+            const tagsHTML = (item.tags || []).map(t => `<span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400 text-[10px]">#${t}</span>`).join(' ');
+
+            return `
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex flex-col justify-between hover:border-amber-500/40 transition-all group">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-bold">
+                                ${catLabel}
+                            </span>
+                            <!-- DELETE BUTTON -->
+                            <button onclick="deleteTalent('${item.id}')" class="px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500 border border-rose-500/30 text-rose-400 hover:text-white text-xs font-bold transition-all flex items-center gap-1">
+                                <i class="fa-solid fa-trash"></i> Delete
+                            </button>
+                        </div>
+
+                        <h3 class="text-base font-bold text-white group-hover:text-amber-400 transition-colors line-clamp-1">
+                            ${item.title}
+                        </h3>
+
+                        <p class="text-xs text-amber-400/90 font-semibold">by ${item.author}</p>
+
+                        <p class="text-xs text-slate-400 line-clamp-3 leading-relaxed">
+                            ${item.description}
+                        </p>
+
+                        <div class="flex flex-wrap gap-1 pt-1">
+                            ${tagsHTML}
+                        </div>
+                    </div>
+
+                    <div class="pt-4 mt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                        <div class="flex items-center gap-3">
+                            <button onclick="likePost('${item.id}')" class="hover:text-rose-400 transition-colors flex items-center gap-1">
+                                <i class="fa-regular fa-heart text-rose-500"></i> <span>${item.likes || 0}</span>
+                            </button>
+                            <span><i class="fa-regular fa-eye text-amber-400 mr-1"></i>${item.views || 0}</span>
+                        </div>
+                        <span class="text-[11px] text-slate-500">${item.date || ''}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // DELETE FUNCTION
+        function deleteTalent(id) {
+            if (confirm("இந்த படைப்பை நிச்சயமாக நீக்க விரும்புகிறீர்களா? / Are you sure you want to delete this item?")) {
+                talents = talents.filter(t => t.id !== id);
+                localStorage.setItem('tth_talents_clean', JSON.stringify(talents));
+                renderAllViews();
+                showToast(currentLang === 'ta' ? 'படைப்பு நீக்கப்பட்டது!' : 'Work deleted successfully!');
+            }
+        }
+
+        function renderExplorePage() {
+            const searchVal = (document.getElementById('explore-search-input')?.value || '').toLowerCase();
+            const sortVal = document.getElementById('explore-sort')?.value || 'newest';
+
+            let filtered = talents.filter(t => {
+                const matchesCat = selectedCategory === 'ALL' || t.category === selectedCategory;
+                const matchesSearch = t.title.toLowerCase().includes(searchVal) || 
+                                      t.description.toLowerCase().includes(searchVal) ||
+                                      t.author.toLowerCase().includes(searchVal);
+                return matchesCat && matchesSearch;
+            });
+
+            if (sortVal === 'views') {
+                filtered.sort((a, b) => (b.views || 0) - (a.views || 0));
+            } else if (sortVal === 'likes') {
+                filtered.sort((a, b) => (b.likes || 0) - (a.likes || 0));
+            } else {
+                filtered.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+            }
+
+            const grid = document.getElementById('explore-cards-grid');
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 text-sm">படைப்புகள் எதுவும் கிடைக்கவில்லை.</div>`;
+            } else {
+                grid.innerHTML = filtered.map(item => createTalentCardHTML(item)).join('');
+            }
+        }
+
+
+        // User Dashboard Render
+        function renderDashboardPage() {
+            document.getElementById('dash-my-posts-count').innerText = talents.length;
+            const totalViews = talents.reduce((sum, t) => sum + (t.views || 0), 0);
+            document.getElementById('dash-my-views-count').innerText = totalViews;
+            document.getElementById('dash-my-offers-count').innerText = offers.length;
+
+            const userPostsList = document.getElementById('dash-user-posts-list');
+            if (talents.length === 0) {
+                userPostsList.innerHTML = `
+                    <div class="p-8 text-center glass-panel rounded-2xl text-slate-400 text-xs space-y-2">
+                        <p>${translations[currentLang].emptyPosts}</p>
+                        <button onclick="navigateTo('submit')" class="px-4 py-2 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs">
+                            ${translations[currentLang].dashBtnNew}
+                        </button>
+                    </div>
+                `;
+            } else {
+                userPostsList.innerHTML = talents.map(t => {
+                    const catLabel = categoryMap[t.category] ? categoryMap[t.category][currentLang] : t.category;
+                    return `
+                        <div class="glass-panel p-4 rounded-2xl flex items-center justify-between">
+                            <div>
+                                <h4 class="text-sm font-bold text-white">${t.title}</h4>
+                                <p class="text-xs text-slate-400">${catLabel} • ${t.date}</p>
+                            </div>
+                            <div class="flex items-center gap-4 text-xs">
+                                <span class="text-slate-400"><i class="fa-solid fa-eye text-amber-400 mr-1"></i>${t.views}</span>
+                                <span class="text-slate-400"><i class="fa-solid fa-heart text-rose-400 mr-1"></i>${t.likes}</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            showToast(currentLang === 'ta' ? 'உங்கள் செய்தி மன்றத்திற்கு அனுப்பப்பட்டது!' : 'Message sent to club admins!');
+            e.target.reset();
+        }
+
+        // Toast Helper
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-text').innerText = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
